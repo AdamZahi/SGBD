@@ -56,4 +56,13 @@ CREATE TABLE contrat_ventes (
     constraint fk2_cin foreign key(cin) references personnes(cin)
 );
 
-
+-- Puissance must be in [..,..,..]
+ALTER TABLE models ADD constraint chk_puissance_interval check(puissance in ('4CH','5CH','6CH'));
+-- Price must be between 10000 and 100000
+ALTER TABLE vehicules ADD constraint chk_prix_demande check(prix_demande BETWEEN 1000 AND 100000);
+-- Name must be different than last name
+ALTER TABLE personnes ADD constraint chk_nom_prenom check(nom != prenom);
+-- "date_debut" must not be null 
+ALTER TABLE acquisitions MODIFY date_debut not null;
+-- Add new column to vehicules table
+ALTER TABLE vehicules ADD num_chassis number not null;
